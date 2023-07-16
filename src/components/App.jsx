@@ -20,7 +20,7 @@ export class App extends Component {
     pictures: [],
     isLoading: false,
     showModal: false,
-    loadMore:false,
+    loadMore: false,
     error: null,
     searchQuery: '',
     pageNumber: 1,
@@ -71,25 +71,34 @@ export class App extends Component {
   };
 
   loadMoreHandler = pageNumber => {
-    this.setState({ pageNumber: pageNumber})
-  }
+    this.setState({ pageNumber: pageNumber });
+  };
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
 
   render() {
-    const { pictures, modalURL, showModal, isLoading, loadMore} = this.state;
+    const { pictures, modalURL, showModal, isLoading, loadMore } = this.state;
     return (
       <div className={styles.App}>
         <Searchbar onSubmit={this.formSubmitHandler} />
         <div className="gallery-wrap">
           <ImageGallery>
             {pictures.map(picture => (
-              <ImageGalleryItem key={picture.id} picture={picture} onClick={this.imageClickHandler}/>
+              <ImageGalleryItem
+                key={picture.id}
+                picture={picture}
+                onClick={this.imageClickHandler}
+              />
             ))}
           </ImageGallery>
-          {loadMore && (<Button onClick={this.loadMoreHandler} page={this.state.pageNumber}/>)}
+          {loadMore && (
+            <Button
+              onClick={this.loadMoreHandler}
+              page={this.state.pageNumber}
+            />
+          )}
         </div>
         {isLoading && <Loader />}
         {showModal && (
