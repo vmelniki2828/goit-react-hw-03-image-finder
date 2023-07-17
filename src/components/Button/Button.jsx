@@ -1,16 +1,10 @@
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button = (props) => {
-  let pageNumber = props.page;
-
-  const handleClick = evt =>  {
-    pageNumber += 1;
-    props.onClick(pageNumber)
-  }
+const Button = ({loadMoreHandler}) => {
 
   return (
-    <button type="button" className={styles.loadMoreButton} onClick={handleClick}>
+    <button type="button" className={styles.loadMoreButton} onClick={loadMoreHandler}>
       Load More
     </button>
   );

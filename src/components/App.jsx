@@ -50,7 +50,7 @@ export class App extends Component {
         }
 
         this.setState({
-          pictures: [...this.state.pictures, ...pictures],
+          pictures: [...pictures],
         });
       } catch (error) {
         this.setState({ error });
@@ -71,7 +71,7 @@ export class App extends Component {
   };
 
   loadMoreHandler = pageNumber => {
-    this.setState({ pageNumber: pageNumber });
+    this.setState(({ pageNumber }) => ({ pageNumber: pageNumber + 1 }));
   };
 
   toggleModal = () => {
@@ -79,6 +79,7 @@ export class App extends Component {
   };
 
   render() {
+    const {loadMoreHandler} = this;
     const { pictures, modalURL, showModal, isLoading, loadMore } = this.state;
     return (
       <div className={styles.App}>
@@ -95,7 +96,7 @@ export class App extends Component {
           </ImageGallery>
           {loadMore && (
             <Button
-              onClick={this.loadMoreHandler}
+              loadMoreHandler={loadMoreHandler}
               page={this.state.pageNumber}
             />
           )}
