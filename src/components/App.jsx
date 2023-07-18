@@ -62,7 +62,7 @@ export class App extends Component {
   }
 
   formSubmitHandler = query => {
-    this.setState({ searchQuery: query, pageNumber: 1, picture: [] });
+    this.setState({ searchQuery: query, pageNumber: 1 });
   };
 
   imageClickHandler = url => {
@@ -79,7 +79,7 @@ export class App extends Component {
   };
 
   render() {
-    const {loadMoreHandler} = this;
+    const { loadMoreHandler } = this;
     const { pictures, modalURL, showModal, isLoading, loadMore } = this.state;
     return (
       <div className={styles.App}>
