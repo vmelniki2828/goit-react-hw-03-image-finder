@@ -50,7 +50,7 @@ export class App extends Component {
         }
 
         this.setState({
-          pictures: [...pictures],
+          pictures: [ ...this.state.pictures, ...pictures],
         });
       } catch (error) {
         this.setState({ error });
