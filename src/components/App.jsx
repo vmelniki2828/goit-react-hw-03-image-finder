@@ -24,13 +24,15 @@ export class App extends Component {
     error: null,
     searchQuery: '',
     pageNumber: 1,
+    modalURL:'',
   };
 
   async componentDidUpdate(prevProps, prevState) {
     if (
       this.state.searchQuery !== prevState.searchQuery ||
       this.state.pageNumber !== prevState.pageNumber
-    ) {
+    ){
+      this.setState({ isLoading: true });
       try {
         const pictures = await fetchPictures(
           this.state.searchQuery,
@@ -62,7 +64,7 @@ export class App extends Component {
   }
 
   formSubmitHandler = query => {
-    this.setState({ searchQuery: query, pageNumber: 1 });
+    this.setState({ searchQuery: query, pageNumber: 1, pictures:[] });
   };
 
   imageClickHandler = url => {
@@ -70,12 +72,12 @@ export class App extends Component {
     this.toggleModal();
   };
 
-  loadMoreHandler = pageNumber => {
-    this.setState(({ pageNumber }) => ({ pageNumber: pageNumber + 1 }));
-  };
-
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
+  loadMoreHandler = pageNumber => {
+    this.setState(({pageNumber}) => ({ pageNumber: pageNumber + 1 }));
   };
 
   render() {
